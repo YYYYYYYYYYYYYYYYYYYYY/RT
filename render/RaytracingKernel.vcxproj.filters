@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Kernel">
+      <UniqueIdentifier>{714f42d5-7134-4a0d-8fa4-81f1f08eb353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\Geometry">
+      <UniqueIdentifier>{1764ef50-5061-4384-b520-32e60da38de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\Misc">
+      <UniqueIdentifier>{52b45ada-1f49-45ac-acae-43fa524f893b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\Render">
+      <UniqueIdentifier>{6c954d46-b0ea-43f9-b73a-7c026f8f2d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communications">
+      <UniqueIdentifier>{6a617be5-80c0-48f3-8757-c8d6fac08cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\Geometry\Primitives">
+      <UniqueIdentifier>{857cfd65-54e3-4c4a-aee0-f9739cbe1d25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\SceneGeometry">
+      <UniqueIdentifier>{35c85f8d-febb-4418-881c-a410ff3012c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vector3.h">
+      <Filter>Kernel\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Kernel\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Kernel\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Kernel\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Kernel\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Kernel\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Kernel\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RMath.h">
+      <Filter>Kernel\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel.h">
+      <Filter>Kernel\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicShape.h">
+      <Filter>Kernel\Geometry\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Kernel\Geometry\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="BBox.h">
+      <Filter>Kernel\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>Kernel\Geometry\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Kernel\Geometry\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Kernel\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="LightMap.h">
+      <Filter>Kernel\SceneGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="BVHTree.h">
+      <Filter>Kernel\SceneGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Kernel\SceneGeometry</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="kernel.cu">
+      <Filter>Kernel\Render</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Packet.cpp">
+      <Filter>Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="BBox.cpp">
+      <Filter>Kernel\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Kernel\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Kernel\SceneGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="BVHTree.cpp">
+      <Filter>Kernel\SceneGeometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
