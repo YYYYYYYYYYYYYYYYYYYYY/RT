@@ -149,6 +149,10 @@ return *this;
 		return (*this) * (*this);
 	}
 
+	CUDA_HD inline float magnitude() const
+	{
+		return sqrt(d2());
+	}
 	CUDA_HD inline Vector3 normal() const
 	{
 		/*float invlen = frsqrt(d2());
