@@ -45,7 +45,6 @@ public:
 	{
 		Vector3 nst = r.Start - GetLocation();
 		Vector3 ndr = nst + r.Dir;
-
 		nst = ToLocal(nst);
 		ndr = ToLocal(ndr);
 
@@ -64,28 +63,14 @@ public:
 
 		//printf("a: %f, b: %f, c: %f\n", a, b, c);
 
-		if (a == 0)
-		{
-			return false;
-		}
+		float d1 = sqrt(d);
+		float t1 = (-b - d1) / 2.0f / a;
+		float t2 = (-b + d1) / 2.0f / a;
 
-		if (d < 0)
+		if (t1 >= 0)
 		{
-			return false;
-		}
-		else
-		{
-			float d1 = sqrt(d);
-			float t1 = (-b - d1) / 2.0f / a;
-			float t2 = (-b + d1) / 2.0f / a;
-
-			if (t1 >= 0)
-			{
-				//printf("time1: %f\n", t1);
-				Vector3 nPos = r1.Start + r1.Dir * t1;
-			
-				//printf("E-boi: %f\n", nPos.e[2]);
-				if (!(0 <= nPos.e[2] && nPos.e[2] <= Height)) return false;
+			Vector3 nPos = r1.Start + r1.Dir * t1;
+			if ((0 <= nPos.e[2] && nPos.e[2] <= Height)) {
 
 				Vector3 nNormal = nPos;
 				nNormal.e[2] = 0;
@@ -105,10 +90,11 @@ public:
 				//printf("dist: %f\n", hitres.dist);
 				return 1;
 			}
-			else if (t2 >= 0)
-			{
-				Vector3 nPos = r1.Start + r1.Dir * t2;
-				if (!(0 < nPos.e[2] && nPos.e[2] < Height)) return false;
+		}
+		else if (t2 >= 0)
+		{
+			Vector3 nPos = r1.Start + r1.Dir * t2;
+			if ((0 < nPos.e[2] && nPos.e[2] < Height)) {
 				Vector3 nNormal = nPos;
 				nNormal.e[2] = 0;
 
@@ -126,9 +112,58 @@ public:
 				hitres.dist = (nPos - r.Start).magnitude();
 				return 1;
 			}
-			return 0;
+		}
+
+		bool up = false;
+		bool down = false;
+
+		float t_up = (Height - r1.Start.z()) / r1.Dir.z();
+		float t_down = (0 - r1.Start.z()) / r1.Dir.z();
+
+		float x_up = 0, y_up = 0;
+		float x_down = 0, y_down = 0;
+
+		x_up = r1.Start.x() + r1.Dir.x() * t_up;
+		y_up = r1.Start.y() + r1.Dir.y() * t_up;
+		up = (x_up*x_up + y_up * y_up < R2);
+		
+		x_down = r1.Start.x() + r1.Dir.x() * t_down;
+		y_down = r1.Start.y() + r1.Dir.y() * t_down;
+		down = (x_down*x_down + y_down * y_down < R2);
+		// TODO: change colour
+		if (!up && !down)
+			return false;
+		else {
+			if (!down || t_up < t_down) {
+				Vector3 nPos = r1.Start + r1.Dir * t_up;
+				Vector3 nNormal = Vector3(0,0, 1);
+				
+				nPos = ToGlobal(nPos);
+				nPos += GetLocation();
+				nNormal.normalize();
+				nNormal = ToGlobal(nNormal);
+
+				hitres.nPos = nPos;
+				hitres.nNormal = nNormal;
+				hitres.col = 0.5 + (nPos.e[colId])/2;
+				hitres.dist = (nPos - r.Start).magnitude();
+			}
+			else {
+				Vector3 nPos = r1.Start + r1.Dir * t_down;
+				Vector3 nNormal = Vector3(0,0,-1);
+				
+				nPos = ToGlobal(nPos);
+				nPos += GetLocation();
+
+				hitres.nPos = nPos;
+				hitres.nNormal = nNormal;
+				hitres.col = 0.5 + (nPos).e[colId]/2;
+				hitres.dist = (nPos - r.Start).magnitude();
+			}
+			return 1;
 		}
 	}
 };
+
 
 #endif
