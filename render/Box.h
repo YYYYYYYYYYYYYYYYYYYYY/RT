@@ -11,18 +11,17 @@ public:
 	CUDA_HD virtual void UpdateBB()
 	{
 		Vector3 p[8];
-		p[0] = GetLocation() + Vector3(0,0,0);
-		p[1] = GetLocation() + Vector3(A,0,0);
+		p[0] = (GetLocation() + X * GetScale().x() * A + Y * GetScale().y() * B);
+		p[1] = GetLocation() + X * GetScale().x() * A;
 
-		p[2] = GetLocation() + Vector3(A,0,C);
-		p[3] = GetLocation() + Vector3(A,B,0);
+		p[2] = GetLocation() + X * GetScale().x() * A + Z * GetScale().y() * C;
+		p[3] = GetLocation() + Y * GetScale().y() * B;
 
-		p[4] = GetLocation() + Vector3(A,B,C);
-		p[5] = GetLocation() + Vector3(0,0,C);
+		p[4] = GetLocation() + Y * GetScale().y() * B + Z * GetScale().z() * C;
+		p[5] = GetLocation();
 
-		p[6] = GetLocation() + Vector3(0,B,0);
-		p[7] = GetLocation() + Vector3(0,B,C);
-
+		p[6] = GetLocation() + Z * GetScale().z() * C;
+		p[7] = GetLocation() + X * GetScale().x() * A + Y * GetScale().y() * B + Z * GetScale().z() * C;
 		bb = p[0];
 
 		for (int i = 1; i < 8; i++)
